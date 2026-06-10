@@ -1,0 +1,8 @@
+[package]
+name = "settlement"
+edition = "2024.beta"
+
+# Built on the PAS framework. Until @mysten/pas's object support lands upstream, this
+# points at the fork carrying it; switch to MystenLabs/pas (a tagged rev) once merged.
+[dependencies]
+pas = { git = "https://github.com/tamashi095/pas.git", subdir = "packages/pas", rev = "feat/object-support" }

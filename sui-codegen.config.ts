@@ -11,7 +11,7 @@ const config: SuiCodegenConfig = {
 	packages: [
 		{
 			package: 'settlement',
-			path: '../../pas/packages/examples/settlement',
+			path: './move',
 		},
 		{
 			package: '@mysten/pas',

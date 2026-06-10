@@ -8,9 +8,20 @@ chain of app-defined rules — each takes its cut / adjusts the price and stamps
 finalizes, delivering the object to the buyer's PAS account. The rule order is enforced on-chain:
 `finalize` aborts unless the receipts match the order the policy maker registered.
 
-This package wraps the on-chain [`settlement` Move example](https://github.com/MystenLabs/pas)
-(`settlement` / `discount` / `royalty` / `floor` / `art_nft`) with generated bindings and a fluent
-builder.
+This is a full-stack package: the **Move contracts** (`move/` — `settlement` / `discount` / `royalty`
+/ `floor` / `art_nft`, depending only on [`pas`](https://github.com/MystenLabs/pas)) **and** the
+TypeScript SDK (generated bindings + a fluent builder) that drives them. The pipeline rides on PAS's
+`add_required_approval` receipt primitive; everything payment- and economics-specific lives here, not
+in pas core.
+
+### Layout
+
+```
+move/   # the settlement Move package (settlement + discount/royalty/floor rules + art_nft demo)
+src/    # the TypeScript SDK (builder + generated contract bindings)
+scripts/settlement-demo.ts  # end-to-end testnet demo
+deployment.testnet.json     # deployed testnet ids the demo reads
+```
 
 ## Install
 
@@ -73,13 +84,21 @@ cd /path/to/pas-settlement && bun add --dev ./vendor/mysten-pas-*.tgz
 (The tarball declares `@mysten/sui` as a peer, so there's a single `@mysten/sui` instance — required
 for `Transaction` building to work.)
 
+The Move package in `move/` depends on `pas` via a git dependency (pointed at the fork carrying
+object support for now; repoint to `MystenLabs/pas` once it lands upstream):
+
+```bash
+cd move && sui move test --build-env testnet
+```
+
 - `bun run typecheck` — type-check `src` (needs `@mysten/pas` resolvable; see above)
 - `bun run test` — unit tests (the builder's command sequence; no `@mysten/pas` runtime needed)
 - `bun run build` — bundle with tsdown
-- `bun run codegen` — regenerate `src/contracts` from the Move sources (needs `@mysten/codegen`)
+- `bun run codegen` — regenerate `src/contracts` from `move/` (needs `@mysten/codegen`, and a sibling
+  `pas` checkout for the dependency bindings)
 
-`scripts/settlement-demo.ts` runs the full pipeline end-to-end on testnet against a deployment
-recorded in the `pas` repo.
+`scripts/settlement-demo.ts` runs the full pipeline end-to-end on testnet against the ids in
+`deployment.testnet.json`.
 
 ## License
 

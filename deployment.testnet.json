@@ -1,0 +1,45 @@
+{
+	"network": "testnet",
+	"deployer": "0xf3a64ba48423dccce1b0e09f33984e88a8649a2aad0bfbd90ef5b3127f065d8d",
+	"pas": {
+		"packageId": "0xe9dc3addc4900213fac45ae2ceadfb5ec6426f7bffbaf98e68706841b7c2440b",
+		"ptbPackageId": "0x00019aab5f1ef85e8416e0474758af8f27c2ab446721140ff3e407edb4b86f3e",
+		"namespaceId": "0x64645c1083eeeac4d041417dd67c321cd0f930045f81f32d21d9373fa63e76a6",
+		"upgradeCapId": "0x046cea57605ee73b48ebd8fc2978ee4c800192d8412027c0efbf83e17df67cbe"
+	},
+	"settlement": {
+		"packageId": "0x1b7509d8949949dfd33ecd72401a48c94c1bfff14dbb7c5bcda62d38e739fe23",
+		"publisher": "0x183756a6de117721966290f6691077c10133a36244394066d9f020b5652e51a3",
+		"artType": "0x1b7509d8949949dfd33ecd72401a48c94c1bfff14dbb7c5bcda62d38e739fe23::art_nft::Art",
+		"policy": "0x9847f7579fdaf403fcd2bc4dbabbef86d731dc760d7ccbfba82b8e0eec5e8893",
+		"policyCap": "0xb2168db7d6d72be69c0a66774f7e36fcd6decbc35ae093dd50d724a7954a4487",
+		"discountConfig": "0x5d2c555186e32cc874153dd769b64be33895c0132b9b27aa8aaa1ebf1a3aa079",
+		"royaltyConfig": "0x630b596eb5fa9af99e5c664215cda83284a0f3f503df63091c8189ae7895c063",
+		"floorConfig": "0x63ca07adc7121351efd0116e6b6f4ae1940be78a3d83e34f2a6e75b5338a2bf1",
+		"params": {
+			"discountBp": 2000,
+			"royaltyBp": 500,
+			"floorMin": 10,
+			"creator": "0x0000000000000000000000000000000000000000000000000000000000c0ffee"
+		}
+	},
+	"demo": {
+		"sellerAccount": "0xd723d0621607f46e363920b5dab89c212ffdbbff06e40e4fdae2f50d1a525bfb",
+		"buyerAccountDerived": "0xf0284b5af6030bce7841d0429dab6158803b75286da961e7ef3017a755dd99c6",
+		"happyPathDigest": "2tkfxu1N1EXtutHFQ7kPzrvsDyHnxEwMnXKd7FV92xTN",
+		"happyPathPayouts": {
+			"buyerRefund": 20,
+			"creatorRoyalty": 4,
+			"sellerProceeds": 76,
+			"salePrice": 100
+		},
+		"adversarialSkipFloorDigest": "41S4rp97uS3zxn4wFnVDAGtZQiXUNGnZR9S9H8RdZNvq",
+		"adversarialAbort": "pas::request::resolve EInvalidNumberOfApprovals (code 1)"
+	},
+	"sdkDemo": {
+		"note": "Same pipeline driven through @mysten/pas-settlement (createSettlement().sell) + the @mysten/pas beginSendObject primitive.",
+		"happyPathDigest": "8xzsnCVDRZGc1d7kFSigzWteL7jnDqxm1QzN2dyW5A68",
+		"happyPathPayouts": { "buyerRefund": 20, "creatorRoyalty": 4 },
+		"adversarialAbort": "skipping the floor rule aborts at pas::request::resolve EInvalidNumberOfApprovals"
+	}
+}

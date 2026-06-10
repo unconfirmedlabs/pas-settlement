@@ -4,3 +4,5 @@ package_summaries
 *.tsbuildinfo
 .DS_Store
 vendor
+build/
+move/Move.lock.tmp

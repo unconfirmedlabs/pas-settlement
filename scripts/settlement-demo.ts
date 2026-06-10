@@ -17,6 +17,7 @@
 import { readFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import { pas } from '@mysten/pas';
 import { SuiGrpcClient } from '@mysten/sui/grpc';
@@ -27,7 +28,7 @@ import { fromBase64, normalizeSuiAddress } from '@mysten/sui/utils';
 import * as artNft from '../src/contracts/settlement/art_nft.js';
 import { createSettlement } from '../src/builder.js';
 
-const DEPLOY_PATH = join(homedir(), 'Documents/GitHub/pas/scripts/.testnet-settlement-deploy.json');
+const DEPLOY_PATH = fileURLToPath(new URL('../deployment.testnet.json', import.meta.url));
 const GRPC_URL = 'https://fullnode.testnet.sui.io:443';
 const RPC_URL = 'https://fullnode.testnet.sui.io';
 const SALE_PRICE = 100;
